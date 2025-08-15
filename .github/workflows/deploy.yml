@@ -2,15 +2,12 @@ name: Deploy to invitalive.com/yanett-ambrosio
 on:
   push:
     branches: [ main ]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # (Opcional) evita que Jekyll ignore carpetas con "_"
       - name: Create .nojekyll
         run: touch .nojekyll
 
@@ -18,7 +15,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PUBLISH_TOKEN }}
-          external_repository: invitalive-digital/invitalive-digital.github.io
+          external_repository: InvitaLive-digital/web-oficial   # 👈 repo con el dominio
           publish_branch: main
-          publish_dir: .                  # publica lo que hay en este repo
-          destination_dir: yanett-ambrosio # ← nombre de carpeta/URL final
+          publish_dir: .                                        # o 'dist'/'build'
+          destination_dir: yanett-ambrosio                      # 👈 subcarpeta/URL
